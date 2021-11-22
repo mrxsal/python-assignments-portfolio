@@ -11,7 +11,7 @@ Unzip the .zip file to a folder of your choice.
 
 3. Change Directory
 With your CLI, make sure you change your directory to the project folder.
-example > cd your_path/MedaMonks_Assignment/project_folder
+example > cd your_path/project_folder
 
 4. Install Required Packages
 In the project_folder, find the requirements.txt file. Install them in your virtual environment.
@@ -60,10 +60,3 @@ will only turn the input_image "input.jpg" into gray scale, but not the overlay 
 ### Testing
 in the cli, run the command:
 > pytest
-
-
-
-
-
-
-
