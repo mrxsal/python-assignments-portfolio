@@ -61,8 +61,8 @@ class ReservationView(CreateView):
 
     def find_parking_space(self):
         empty_parking_space = ParkingSpace.objects.filter(
-            ~Q(session__start__lte=self.object.start) &
-            ~Q(session__end__gte=self.object.end))
+            ~(Q(session__start__lte=self.object.end) &
+              Q(session__end__gte=self.object.start)))
         if empty_parking_space.exists():
             return empty_parking_space[0]
         return HttpResponseRedirect(self.request.path_info)

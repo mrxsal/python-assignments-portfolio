@@ -15,7 +15,8 @@ class ParkingSpace(models.Model):
 
     @property
     def active_session(self, _datetime=datetime.datetime.now()):
-        session = self.session_set.filter(start__lte=_datetime, end__gte=_datetime)
+        session = self.session_set.filter(
+            start__lte=_datetime, end__gte=_datetime)
         if session.exists():
             return session[0]
         return None
@@ -35,7 +36,8 @@ class Session(models.Model):
     vehicle = models.ForeignKey('accounts.vehicle', on_delete=models.CASCADE)
     parking_space = models.ForeignKey(
         ParkingSpace, on_delete=models.SET_NULL, null=True)
-    payment = models.ForeignKey('payments.payment', on_delete=models.CASCADE, null=True, blank=True)
+    payment = models.ForeignKey(
+        'payments.payment', on_delete=models.CASCADE, null=True, blank=True)
 
     session_type = models.CharField(
         'session type', choices=SessionType.choices, max_length=15, default="on_arrival")
@@ -49,14 +51,17 @@ class Session(models.Model):
 
     is_active = models.BooleanField(default=False, null=False)
 
+    def validate_on_clean_and_save(self):
+        if Session.objects.filter(parking_space=self.parking_space, start__lte=self.end, end__gte=self.start):
+            raise ValidationError(
+                'This parking lot already has an active reservation for this start and end date.')
+        if self.end <= self.start:
+            raise ValidationError('start date comes after the end date.')
+
     def clean(self):
         super().clean()
-        if Session.objects.filter(parking_space=self.parking_space, start__lte=self.start, end__gte=self.end):
-            raise ValidationError(
-                'This parking lot already has an active reservation for this start and end date.')
+        self.validate_on_clean_and_save()
 
     def save(self, *args, **kwargs):
-        if Session.objects.filter(parking_space=self.parking_space, start__lte=self.start, end__gte=self.end):
-            raise ValidationError(
-                'This parking lot already has an active reservation for this start and end date.')
+        self.validate_on_clean_and_save()
         super(Session, self).save(*args, **kwargs)

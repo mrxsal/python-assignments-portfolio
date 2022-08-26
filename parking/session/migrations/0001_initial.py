@@ -5,6 +5,7 @@ import string
 
 from django.db import migrations, models
 import django.db.models.deletion
+from django.utils.timezone import make_aware
 
 
 class Migration(migrations.Migration):
@@ -28,8 +29,8 @@ class Migration(migrations.Migration):
             Session.objects.create(
                 vehicle=vehicle,
                 parking_space=ParkingSpace.objects.get(id=vehicle.id*2),
-                start=datetime.now() - timedelta(hours=6),
-                end=datetime.now() + timedelta(hours=6),
+                start=make_aware(datetime.now() - timedelta(hours=6)),
+                end=make_aware(datetime.now() + timedelta(hours=6)),
                 is_active=True,
             )
 

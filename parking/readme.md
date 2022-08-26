@@ -16,6 +16,8 @@ Tests:
 
 - There is a payments app, which currently sits unused due to time constraints. Here, the idea is to configure the rates for each parking space for a given time period. Next steps could be to finish this up and integrate it with the reservation, so the price can be shown before completing the reservation.
 - I added a visual UI for the parking lot as an extra. However this only shows the current occupancy per floor. It would be nice to add a date (range) to the filter, to easily see which spaces are available without directly having to make a reservation.
+- Session.check_in, Session.check_out and is_active may be used in the future to store when a vehicle has actually parked in the parking space.
+- Created tests for ensuring no overlapping sessions can occur on the same parking lot for given datetime ranges. However, more tests need to be written to achieve full test coverage.
 
 # Full-stack developer Candidate
 
