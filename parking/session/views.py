@@ -1,11 +1,13 @@
 
+import datetime
+
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, FormView
 
-from .forms import ReservationForm, ParkingLotForm
+from .forms import ParkingLotForm, ReservationForm
 from .models import ParkingSpace, Session
 from accounts.models import Vehicle
 
@@ -22,6 +24,7 @@ class ParkingLotView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['parking_spaces'] = self.get_parking_lots()
+        context['current_occupancy'] = self.get_current_occupancy()
         return context
 
     def get_parking_lots(self):
@@ -29,6 +32,13 @@ class ParkingLotView(FormView):
         parking_spaces = ParkingSpace.objects.filter(
             floor=floor).order_by('code')
         return parking_spaces
+
+    def get_current_occupancy(self):
+        all_parking_spaces = ParkingSpace.objects.all().count()
+        unavailable_parking_spaces = ParkingSpace.objects.filter(
+            Q(session__start__lte=datetime.datetime.now()) &
+            Q(session__end__gte=datetime.datetime.now())).count()
+        return f'{round(unavailable_parking_spaces / all_parking_spaces, 2)*100}%'
 
 
 class ReservationView(CreateView):

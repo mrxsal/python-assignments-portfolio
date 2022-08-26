@@ -1,50 +1,19 @@
 # Installation
-
-- ensure you have pipenv installed, and python running 3.10.5
+if you cloned the entire python-assignments-portfolio, ensure you cd into the parking directory
+- install pipenv and python 3.10.5
 - pipenv install
+- pipenv shell
+- python manage.py migrate
+- python manage.py runserver
 
-# Architecture notes
+Tests:
+- 
 
-## models:
+# Notes
+## Future ideas
 
-### Accounts
-
-- User (customer)
-- -
-
-- Vehicle
-- - FK to user, null=True, blank=True
-- - license plate
-- - model, null=True, blank=True
-- - type, null=True, blank=True
-
-### Sessions
-
-- ParkingSpace
-- - code
-- - floor
-
-- Session
-- - FK to Vehicle
-- - FK to ParkingSpace
-- - FK to Price
-- - type (reservation, spot)
-- - start datetime
-- - end datetime
-- - check_in
-- - check_out
-- - active
-
-- Rates
-- - name (free, discount, standard, premium)
-- - value (0.00, 2.00, 4.00)
-
-- Time Periods
-- - from time
-- - to time
-
-- Payment
-- - status (not started, pending, declined, completed)
+- There is a payments app, which currently sits unused due to time constraints. Here, the idea is to configure the rates for each parking space for a given time period. Next steps could be to finish this up and integrate it with the reservation, so the price can be shown before completing the reservation.
+- I added a visual UI for the parking lot as an extra. However this only shows the current occupancy per floor. It would be nice to add a date (range) to the filter, to easily see which spaces are available without directly having to make a reservation.
 
 # Full-stack developer Candidate
 
@@ -74,12 +43,11 @@ that there is a way to automate this process by building a webapp that handles p
 reservations and can show the occupation rate of the parking lot so it can quickly determine
 whether there is a spot available for any time a user chooses, or not.
 Your challenge:
-● Build a webapp that accomplishes the requirements outlined in the story
-● This should be a demo program that can be run and used as a proof of concept
-● There should be clear documentation that explains how to run and use the program
-as well as future ideas for how to improve it,
-● We're always happy to be surprised and see your approach to this problem
-● We use Docker, Django, and Python and react.js in the company however feel free to use
+- Build a webapp that accomplishes the requirements outlined in the story
+- This should be a demo program that can be run and used as a proof of concept
+- There should be clear documentation that explains how to run and use the program as well as future ideas for how to improve it,
+- We're always happy to be surprised and see your approach to this problem
+- We use Docker, Django, and Python and react.js in the company however feel free to use
 other tools and languages if you feel they are better suited to this problem
 
 ### Part two

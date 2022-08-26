@@ -8,6 +8,7 @@
       <form method="GET">
         <div class="form-wrapper"> 
             <p>Last Updated: {% now "SHORT_DATETIME_FORMAT" %}</p>
+            <p>Current Occupancy: {{current_occupancy}} </p>
             {{form|crispy}}
             <button type="submit" class="btn btn-primary mx-2">
                 Filter
