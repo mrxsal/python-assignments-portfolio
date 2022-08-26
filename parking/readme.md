@@ -10,6 +10,8 @@ Tests:
 - 
 
 # Notes
+- already added some data for demo purposes, which be populated upon running /manage.py migrate
+
 ## Future ideas
 
 - There is a payments app, which currently sits unused due to time constraints. Here, the idea is to configure the rates for each parking space for a given time period. Next steps could be to finish this up and integrate it with the reservation, so the price can be shown before completing the reservation.
