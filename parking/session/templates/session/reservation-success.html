@@ -1,0 +1,31 @@
+{% extends 'parking/base.html' %} 
+{% load static crispy_forms_tags %} 
+
+
+{% block content %}
+<div class="container h-100 d-flex flex-column justify-content-center">
+  <div class="row">
+    <div class="col d-flex flex-column align-items-center text-center">
+      <h3> Reservation Successful </h3>
+      <p>We found an available parking space for you </p>
+      
+      <ul>
+        <li>License Plate: {{object.vehicle.license_plate}}</li>
+        <li>Start: {{object.start|date:'m-d H:i'}}</li>
+        <li>End: {{object.end|date:'m-d H:i'}}</li>
+        <li>Parking Space: {{object.parking_space}}</li>
+        <li>floor: {{object.parking_space.floor}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="{% static 'js/reservation.js' %}"></script>
+
+<style>
+  .form-wrapper {
+    max-width: 600px;
+  }
+</style>
+
+{% endblock content %}

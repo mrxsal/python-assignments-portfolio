@@ -1,16 +1,39 @@
+:root {
+  --parking-primary: #0d65ad;
+  --parking-secondary: #feca2e;
+  --parking-tertiary: #00284d;
+}
+
 body,
 html {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
   width: 100vw;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+
+body {
+  margin-top: 80px;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 0, 0.5) !important;
 }
 
 .navbar-logo {
   height: 50px;
+}
+
+.btn-primary {
+  background-color: var(--parking-secondary);
+  color: black;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--parking-tertiary);
 }

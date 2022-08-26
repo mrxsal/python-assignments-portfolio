@@ -8,8 +8,9 @@
 ## models:
 
 ### Accounts
+
 - User (customer)
-- - 
+- -
 
 - Vehicle
 - - FK to user, null=True, blank=True
@@ -18,13 +19,14 @@
 - - type, null=True, blank=True
 
 ### Sessions
-- ParkingLot
+
+- ParkingSpace
 - - code
 - - floor
 
 - Session
 - - FK to Vehicle
-- - FK to ParkingLot
+- - FK to ParkingSpace
 - - FK to Price
 - - type (reservation, spot)
 - - start datetime
@@ -44,7 +46,6 @@
 - Payment
 - - status (not started, pending, declined, completed)
 
-
 # Full-stack developer Candidate
 
 ## Assignment
@@ -54,6 +55,7 @@ advantage. For ANY questions, please feel free to contact us about it.
 The assignment should be completed within a week but if you need more time, let us know.
 
 ### Part one
+
 This assignment is quite open for interpretation, however, this was done on purpose. We’d like
 to see how you would approach such a project and expect an end result that matches with the
 vacancy you are applying for. We’d like to see your train of thought about the architecture and
@@ -81,6 +83,7 @@ as well as future ideas for how to improve it,
 other tools and languages if you feel they are better suited to this problem
 
 ### Part two
+
 One of the applications we are currently running consists of a frontend server (Ridesharing) and
 backend server (Travel matrix). Both systems are comprised of multiple dockers, combined into
 microservices, and several databases. The api service consists of a django based rest
@@ -89,7 +92,8 @@ This platform, thus primarily running as an API service, must be made ready for 
 (auto)scaling and become redundant (double servers if you will) in its setup for continuity
 reasons as well as rolling application updates during the day.
 Your challenge:
+
 - Deliver a design of a possible end setup, as well as a plan of attack to get there.
 - What technologies would you choose to realise this and why?
 - What questions would you like to have seen answered upfront to have delivered an even
-better design?
+  better design?

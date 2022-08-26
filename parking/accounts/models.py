@@ -38,5 +38,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Vehicle(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
-    license_plate = models.CharField(max_length=7, null=False)
+    license_plate = models.CharField(max_length=10, null=False, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.license_plate = self.license_plate.upper().replace(' ', '').replace('-', '')
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.license_plate
     

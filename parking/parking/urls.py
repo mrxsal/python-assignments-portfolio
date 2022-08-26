@@ -2,13 +2,12 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 
-from session.views import ParkingLotView
+from session.views import ParkingLotView, ReservationView, ReservationSuccessView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', ParkingLotView.as_view(), name='parkinglot'), 
+
+    path('', ParkingLotView.as_view(), name='parkingspace'),
+    path('reservation/', ReservationView.as_view(), name='reservation'),
+    path('reservation/<int:id>/', ReservationSuccessView.as_view(), name='reservation-success'),
 ]
-# if settings.DEBUG:
-#     from django.conf.urls.static import static
-#     urlpatterns += static(settings.STATIC_URL,
-#                           document_root=settings.STATIC_ROOT)
