@@ -1,5 +1,7 @@
 # Installation
+
 if you cloned the entire python-assignments-portfolio, ensure you cd into the parking directory
+
 - install pipenv and python 3.10.5
 - pipenv install
 - pipenv shell
@@ -7,9 +9,11 @@ if you cloned the entire python-assignments-portfolio, ensure you cd into the pa
 - python manage.py runserver
 
 Tests:
-- 
+
+- python manage.py test
 
 # Notes
+
 - already added some data for demo purposes, which be populated upon running /manage.py migrate
 
 ## Future ideas
@@ -18,6 +22,9 @@ Tests:
 - I added a visual UI for the parking lot as an extra. However this only shows the current occupancy per floor. It would be nice to add a date (range) to the filter, to easily see which spaces are available without directly having to make a reservation.
 - Session.check_in, Session.check_out and is_active may be used in the future to store when a vehicle has actually parked in the parking space.
 - Created tests for ensuring no overlapping sessions can occur on the same parking lot for given datetime ranges. However, more tests need to be written to achieve full test coverage.
+
+## part two answers
+
 
 # Full-stack developer Candidate
 
@@ -47,12 +54,13 @@ that there is a way to automate this process by building a webapp that handles p
 reservations and can show the occupation rate of the parking lot so it can quickly determine
 whether there is a spot available for any time a user chooses, or not.
 Your challenge:
+
 - Build a webapp that accomplishes the requirements outlined in the story
 - This should be a demo program that can be run and used as a proof of concept
 - There should be clear documentation that explains how to run and use the program as well as future ideas for how to improve it,
 - We're always happy to be surprised and see your approach to this problem
 - We use Docker, Django, and Python and react.js in the company however feel free to use
-other tools and languages if you feel they are better suited to this problem
+  other tools and languages if you feel they are better suited to this problem
 
 ### Part two
 
