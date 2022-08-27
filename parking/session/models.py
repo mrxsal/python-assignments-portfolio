@@ -4,6 +4,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils.timezone import make_aware
 
 
 class ParkingSpace(models.Model):
@@ -14,15 +15,15 @@ class ParkingSpace(models.Model):
         return self.code
 
     @property
-    def active_session(self, _datetime=datetime.datetime.now()):
+    def active_session(self, _datetime=make_aware(datetime.datetime.now())):
         session = self.session_set.filter(
             start__lte=_datetime, end__gte=_datetime)
         if session.exists():
             return session[0]
-        return None
+        return False
 
     @property
-    def is_taken(self, _datetime=datetime.datetime.now()):
+    def is_taken(self, _datetime=make_aware(datetime.datetime.now())):
         if self.active_session:
             return True
         return False
@@ -42,10 +43,11 @@ class Session(models.Model):
     session_type = models.CharField(
         'session type', choices=SessionType.choices, max_length=15, default="on_arrival")
 
-    # start/end of either reservation or prepaid
+    # requested start/end of (reservation) session 
     start = models.DateTimeField(null=False)
     end = models.DateTimeField(null=False)
-    # actual start/end of parking session
+
+    # actual start/end of parking session (currently unused)
     check_in = models.DateTimeField('check in', null=True, blank=True)
     check_out = models.DateTimeField('check out', null=True, blank=True)
 

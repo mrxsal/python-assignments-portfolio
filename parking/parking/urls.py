@@ -7,7 +7,8 @@ from session.views import ParkingLotView, ReservationView, ReservationSuccessVie
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', ParkingLotView.as_view(), name='parkingspace'),
+    path('', ParkingLotView.as_view(), name='parkinglot'),
     path('reservation/', ReservationView.as_view(), name='reservation'),
-    path('reservation/<int:id>/', ReservationSuccessView.as_view(), name='reservation-success'),
+    path('reservation/<int:id>/', ReservationSuccessView.as_view(),
+         name='reservation-success'),
 ]

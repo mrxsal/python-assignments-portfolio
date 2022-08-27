@@ -4,9 +4,6 @@ from django.db import models
 from .managers import UserManager
 
 
-# Create your models here.
-
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('email address', unique=True)
     first_name = models.CharField('first name', max_length=30, blank=True)
@@ -40,10 +37,13 @@ class Vehicle(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True)
     license_plate = models.CharField(max_length=10, null=False, unique=True)
 
+    def clean(self):
+        self.license_plate = self.license_plate.upper().replace(' ', '').replace('-', '')
+        super().clean()
+
     def save(self, *args, **kwargs):
         self.license_plate = self.license_plate.upper().replace(' ', '').replace('-', '')
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.license_plate
-    
