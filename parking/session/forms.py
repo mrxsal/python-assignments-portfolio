@@ -17,6 +17,13 @@ class ParkingLotForm(forms.ModelForm):
         model = ParkingSpace
         fields = ['floor']
 
+    def __init__(self, *args, **kwargs):
+        self.floor = kwargs.pop('floor', None)
+        super(ParkingLotForm, self).__init__(*args, **kwargs)
+        # set initial of floor field based on floor in get parameter
+        if self.floor:
+            self.fields['floor'].initial = self.floor
+
 
 class ReservationForm(forms.ModelForm):
     license_plate = forms.CharField(max_length=10)

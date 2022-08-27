@@ -12,7 +12,7 @@
 
 2. ### django parking web application
 
-   created: 26 August 2022 (approx. 8 hrs of work)
+   created: 26 August 2022 (approx. 14 hrs of work)
    Django / HTML / vanilla JS
    An assignment to create a web app for a parking lot operator.
 

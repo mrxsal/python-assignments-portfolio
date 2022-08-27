@@ -28,6 +28,11 @@ class ParkingLotView(FormView):
         context['current_occupancy'] = self.get_current_occupancy()
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(ParkingLotView, self).get_form_kwargs()
+        kwargs['floor'] = self.request.GET.get('floor', 1)
+        return kwargs
+
     def get_parking_lots(self):
         floor = self.request.GET.get('floor', 1)
         parking_spaces = ParkingSpace.objects.filter(

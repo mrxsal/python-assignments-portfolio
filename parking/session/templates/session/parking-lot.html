@@ -28,8 +28,8 @@
         {{space}}
         {% if space.is_taken %}
          <p>{{space.active_session.vehicle.license_plate}}</p>
-         <p>{{space.active_session.start|date:'m-d H:i' }}</p>
-         <p>{{space.active_session.end|date:'m-d H:i' }}</p>
+         <p>start:<br/> {{space.active_session.start|date:'d-m H:i' }}</p>
+         <p>end:<br/> {{space.active_session.end|date:'d-m H:i' }}</p>
         {% endif %}
       </div>
     </div>
