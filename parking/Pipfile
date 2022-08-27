@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django = "*"
 crispy-bootstrap5 = "*"
+coverage = "*"
 
 [dev-packages]
 autopep8 = "*"

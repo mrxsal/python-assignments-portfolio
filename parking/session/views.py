@@ -1,6 +1,7 @@
 
 import datetime
 
+from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -44,6 +45,8 @@ class ParkingLotView(FormView):
         unavailable_parking_spaces = ParkingSpace.objects.filter(
             Q(session__start__lte=make_aware(datetime.datetime.now())) &
             Q(session__end__gte=make_aware(datetime.datetime.now()))).count()
+        if not all_parking_spaces:
+            return 'No Parking Spaces'
         return f'{round(unavailable_parking_spaces / all_parking_spaces, 2)*100}%'
 
 
@@ -57,7 +60,10 @@ class ReservationView(CreateView):
         vehicle, created = Vehicle.objects.get_or_create(license_plate=form.cleaned_data.get(
             'license_plate').upper().replace(' ', '').replace('-', ''))
         self.object.vehicle = vehicle
-        parking_space = self.find_parking_space()
+        if self.find_parking_space():
+            parking_space = self.find_parking_space()
+        else:
+            return HttpResponseRedirect(self.request.path_info)
         self.object.parking_space = parking_space
         self.object.save()
         return redirect(self.get_success_url())
@@ -71,7 +77,9 @@ class ReservationView(CreateView):
               Q(session__end__gte=self.object.start)))
         if empty_parking_space.exists():
             return empty_parking_space[0]
-        return HttpResponseRedirect(self.request.path_info)
+        messages.error(
+            self.request, 'There are no available spaces for the selected time slots.')
+        return None
 
 
 class ReservationSuccessView(DetailView):
